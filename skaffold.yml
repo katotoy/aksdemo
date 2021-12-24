@@ -2,7 +2,7 @@ apiVersion: skaffold/v1
 kind: Config
 build:
   artifacts:
-    - image: aksdemoregsyril.azurecr.io/demos/skaffold-spring-boot-example
+    - image: aksdemoccr.azurecr.io/demos/skaffold-spring-boot-example
       jib: {}
   local: {}
 
