@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aksdemo-app
+  labels:
+    app: aksdemo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aksdemo-app
+  template:
+    metadata:
+      labels:
+        app: aksdemo-app
+    spec:
+      initContainers:
+        - name: init-db
+          image: busybox:1.31
+          command: ['sh', '-c', 'echo -e "Checking for the availability of MySQL Server deployment"; while ! nc -z mysql 3306; do sleep 1; printf "-"; done; echo -e "  >> MySQL DB Server has started";']
+      containers:
+        - name: aksdemo-app
+          image: aksdemocr1.azurecr.io/samples/aksdemo
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:mysql://mysql:3306/aksdemo"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "dbadmin@aksdemosyril"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "Redhat1449"
