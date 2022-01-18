@@ -5,7 +5,7 @@ metadata:
   labels:
     app: aksdemo-app
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: aksdemo-app
@@ -20,7 +20,7 @@ spec:
           command: ['sh', '-c', 'echo -e "Checking for the availability of MySQL Server deployment"; while ! nc -z mysql 3306; do sleep 1; printf "-"; done; echo -e "  >> MySQL DB Server has started";']
       containers:
         - name: aksdemo-app
-          image: aksdemocr1.azurecr.io/samples/aksdemo
+          image: #{IMAGEURL}#
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -31,3 +31,5 @@ spec:
               value: "dbadmin@aksdemosyril"
             - name: SPRING_DATASOURCE_PASSWORD
               value: "Redhat1449"
+            - name: SERVER_PORT
+              value: "8080"
