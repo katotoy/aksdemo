@@ -1,5 +1,4 @@
-FROM adoptopenjdk/openjdk11:jdk-11.0.2.9-slim
+FROM adoptopenjdk/openjdk11:alpine-jre
 WORKDIR /opt
-EXPOSE 8080
-COPY target/*.jar /opt/app.jar
-ENTRYPOINT exec java $JAVA_OPTS -jar app.jar
+COPY target/aksdemo-0.0.1-SNAPSHOT.jar /opt/app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
