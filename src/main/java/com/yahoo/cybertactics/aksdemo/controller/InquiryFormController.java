@@ -25,8 +25,7 @@ public class InquiryFormController {
 
     @PostMapping("/form")
     public String processInquiryForm(@ModelAttribute InquiryRequestDto data){
-        System.out.println("test: " + data.getInquiry());
-        inquiryService.saveInquriy(data);
+        inquiryService.saveInquiry(data);
         return "inquiry-thank-you";
     }
 }

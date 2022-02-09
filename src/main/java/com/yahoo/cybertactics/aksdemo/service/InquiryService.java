@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface InquiryService {
 
-    String saveInquriy(InquiryRequestDto requestDto);
+    String saveInquiry(InquiryRequestDto requestDto);
 
     List<Inquiry> getAllInquiries();
 }

@@ -8,6 +8,9 @@ trigger:
 resources:
 - repo: self
 
+recaptcha notes
+https://www.pixeltrice.com/recaptcha-validation-in-registration-form-using-spring-boot-application/
+
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '5d6006bc-f4c7-4309-aab5-8ed19b7559c0'
