@@ -9,6 +9,17 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PW8C76DZ21"></script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PW8C76DZ21');
+
+    </script>
+
 </head>
 
 <body class="container-fluid">
@@ -17,105 +28,114 @@
     <nav class="navbar navbar-expand-sm navbar-custom mx-5">
 
         <div class="container-fluid">
-          <!-- Links -->
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link custom-a" href="#">Our Products</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link custom-a" href="#">Promotions</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link custom-a" href="#">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link custom-a" href="/inquiry/form">Contact Us</a>
-            </li>
-          </ul>
+            <!-- Links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link custom-a" href="#">Our Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link custom-a" href="#">Promotions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link custom-a" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link custom-a" href="/inquiry/form">Contact Us</a>
+                </li>
+            </ul>
         </div>
-      
-      </nav>
+
+    </nav>
 </header>
 
 
-    <div class="row mx-5">
-        <div class="col-md-6">
-            <h2 class="mt-4 mb-6">Contact Us</h2>
+<div class="row mx-5">
+    <div class="col-md-6">
+        <h2 class="mt-4 mb-6">Contact Us</h2>
 
-            <div th:if="${message!=null}">
-                <span class="alert alert-danger" th:text="${message}"></span>
-            </div>
+        <div th:if="${message!=null}">
+            <span class="alert alert-danger" th:text="${message}"></span>
+        </div>
 
-            <form method="post" th:action="@{/inquiry/form}" th:object="${inquiry}">
-                
-                <div class="form-group">
-                    <p class="mt-4 mb-0">Are you an existing customer?</p>
-                    <input type="hidden" id="isCustomerCheck" name="isCustomerCheck" th:field="*{customer}">
-                    <div class="form-check form-check-inline my-1">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onchange="set_isCustomerCheck_true();">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                          Yes
-                        </label>
-                      </div>
-                      <div class="form-check form-check-inline my-0">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onchange="set_isCustomerCheck_false();" checked>
-                        <label class="form-check-label" for="flexRadioDefault2">
-                          No
-                        </label>
-                      </div>
-                </div>
-                
-                <div class="form-group w-50">
-                    <input type="hidden" id="topic" name="topic" th:field="*{request}">
-                    <label for="topicSelect">Your Request</label>
-                    <select class="form-control" id="topicSelect" onchange="update();">
-                        <option>I like a callback</option>
-                        <option>I have a feedback</option>
-                    </select>
-                </div>
+        <form method="post" th:action="@{/inquiry/form}" th:object="${inquiry}">
 
-                <div class="form-group w-50">
-                    <textarea class="form-control" style="display:block;" placeholder="Please provide your feedback here. (Max. 500 characters limit)" id="inquiryText" rows="4"th:field="*{requestText}"></textarea>
-                </div>
-
-                <div class="form-group w-50">
-                    <p>Your contact details</p>
-                    <input id="first_name" placeholder="First Name" required type="text" th:field="*{firstName}"
-                           class="form-control"/>
-                </div>
-
-                <div class="form-group w-50">
-                    <input id="last_name" placeholder="Last Name" required type="text" th:field="*{lastName}"
-                           class="form-control"/>
-                </div>
-
-                <div class="form-group w-50">
-                    <input id="contactNumber" placeholder="Contact Number" required type="text" th:field="*{contactNumber}"
-                           class="form-control"/>
-                </div>
-            
-                <div class="form-check my-3">
-                    <input class="form-check-input" type="checkbox" value="" id="disclaimerCheck" name="disclaimerCheck" onchange="check_checkbox();">
-                    <label class="form-check-label" for="disclaimerCheck">
-                      <span style="color: #948a54;">Yes, I agree to the disclaimers before submitting this request.</span> 
+            <div class="form-group">
+                <p class="mt-4 mb-0">Are you an existing customer?</p>
+                <input type="hidden" id="isCustomerCheck" name="isCustomerCheck" th:field="*{customer}">
+                <div class="form-check form-check-inline my-1">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                           onchange="set_isCustomerCheck_true();">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Yes
                     </label>
                 </div>
-                <input type="hidden" id="isRecaptchaChecked" name="isRecaptchaChecked" value="false">
-                <div id="g-recaptcha" class="g-recaptcha my-3"
-                     data-sitekey="6LcmiWweAAAAAPRo_Ut6jkjulCYDxqwG6zXpsuqB" data-callback="recaptchaCallback" >
+                <div class="form-check form-check-inline my-0">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                           onchange="set_isCustomerCheck_false();" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        No
+                    </label>
                 </div>
-                <input type="submit" id="formSubmit" class="btn btn-danger me-2" value="Submit" disabled>
-            </form>
-        </div>
-        <div class="col-md-6">
-            <div class="mapouter"><div class="gmap_canvas border border-warning mx-5 my-5"><iframe width="932" height="703" id="gmap_canvas"
-                src="https://maps.google.com/maps?q=12%20Marina%20View,%20Singapore%20018961&t=&z=13&ie=UTF8&iwloc=&output=embed"
-               frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-                <style>.gmap_canvas {overflow:hidden;background:none!important;height:703px;width:932px;}</style></div></div>
+            </div>
+
+            <div class="form-group w-50">
+                <input type="hidden" id="topic" name="topic" th:field="*{request}">
+                <label for="topicSelect">Your Request</label>
+                <select class="form-control" id="topicSelect" onchange="update();">
+                    <option>I like a callback</option>
+                    <option>I have a feedback</option>
+                </select>
+            </div>
+
+            <div class="form-group w-50">
+                <textarea class="form-control" style="display:block;"
+                          placeholder="Please provide your feedback here. (Max. 500 characters limit)" id="inquiryText"
+                          rows="4" th:field="*{requestText}"></textarea>
+            </div>
+
+            <div class="form-group w-50">
+                <p>Your contact details</p>
+                <input id="first_name" placeholder="First Name" required type="text" th:field="*{firstName}"
+                       class="form-control"/>
+            </div>
+
+            <div class="form-group w-50">
+                <input id="last_name" placeholder="Last Name" required type="text" th:field="*{lastName}"
+                       class="form-control"/>
+            </div>
+
+            <div class="form-group w-50">
+                <input id="contactNumber" placeholder="Contact Number" required type="text" th:field="*{contactNumber}"
+                       class="form-control"/>
+            </div>
+
+            <div class="form-check my-3">
+                <input class="form-check-input" type="checkbox" value="" id="disclaimerCheck" name="disclaimerCheck"
+                       onchange="check_checkbox();">
+                <label class="form-check-label" for="disclaimerCheck">
+                    <span style="color: #948a54;">Yes, I agree to the disclaimers before submitting this request.</span>
+                </label>
+            </div>
+            <input type="hidden" id="isRecaptchaChecked" name="isRecaptchaChecked" value="false">
+            <div id="g-recaptcha" class="g-recaptcha my-3"
+                 data-sitekey="6LcmiWweAAAAAPRo_Ut6jkjulCYDxqwG6zXpsuqB" data-callback="recaptchaCallback">
+            </div>
+            <input type="submit" id="formSubmit" class="btn btn-danger me-2" value="Submit" disabled>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <div class="mapouter mr-5 my-5">
+            <div class="gmap_canvas border border-warning">
+                <iframe width="932" height="703" id="gmap_canvas"
+                        src="https://maps.google.com/maps?q=12%20Marina%20View,%20Singapore%20018961&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                        frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                <style>.gmap_canvas {overflow:hidden;background:none!important;height:703px;width:932px;}</style>
+            </div>
         </div>
     </div>
+</div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
         function update() {
             var select = document.getElementById('topicSelect');
             var option = select.options[select.selectedIndex];
@@ -160,7 +180,8 @@
           document.getElementById("isCustomerCheck").value = false
         }
 
-    </script>
+
+</script>
 
 </body>
 </html>
