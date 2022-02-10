@@ -8,6 +8,7 @@
     <title>Demo - Contact Us</title>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body class="container-fluid">
@@ -40,6 +41,11 @@
     <div class="row mx-5">
         <div class="col-md-6">
             <h2 class="mt-4 mb-6">Contact Us</h2>
+
+            <div th:if="${message!=null}">
+                <span class="alert alert-danger" th:text="${message}"></span>
+            </div>
+
             <form method="post" th:action="@{/inquiry/form}" th:object="${inquiry}">
                 
                 <div class="form-group">
@@ -94,16 +100,20 @@
                       <span style="color: #948a54;">Yes, I agree to the disclaimers before submitting this request.</span> 
                     </label>
                 </div>
-                
+                <input type="hidden" id="isRecaptchaChecked" name="isRecaptchaChecked" value="false">
+                <div id="g-recaptcha" class="g-recaptcha my-3"
+                     data-sitekey="6LcmiWweAAAAAPRo_Ut6jkjulCYDxqwG6zXpsuqB" data-callback="recaptchaCallback" >
+                </div>
                 <input type="submit" id="formSubmit" class="btn btn-danger me-2" value="Submit" disabled>
-
             </form>
         </div>
-        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="mapouter"><div class="gmap_canvas border border-warning mx-5 my-5"><iframe width="932" height="703" id="gmap_canvas"
+                src="https://maps.google.com/maps?q=12%20Marina%20View,%20Singapore%20018961&t=&z=13&ie=UTF8&iwloc=&output=embed"
+               frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                <style>.gmap_canvas {overflow:hidden;background:none!important;height:703px;width:932px;}</style></div></div>
+        </div>
     </div>
-
-
-
 
     <script type="text/javascript">
         function update() {
@@ -123,9 +133,23 @@
         }
         update();
 
+        function recaptchaCallback(){
+            document.getElementById('isRecaptchaChecked').value = true
+            check_checkbox();
+        }
+
         function check_checkbox(){
             var checkbx = document.getElementById('disclaimerCheck');
-            document.getElementById("formSubmit").disabled = !checkbx.checked;
+            var recaptchaChecked = document.getElementById('isRecaptchaChecked').value;
+            var formButton = document.getElementById("formSubmit");
+
+            if(checkbx.checked && recaptchaChecked && recaptchaChecked != 'false'){
+                formButton.removeAttribute("disabled", "");
+                formButton.setAttribute("enabled", "");
+            }else{
+                formButton.removeAttribute("enabled", "");
+                formButton.setAttribute("disabled", "");
+            }
         }
 
         function set_isCustomerCheck_true(){

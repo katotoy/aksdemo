@@ -37,6 +37,6 @@ public class InquiryServiceImpl implements  InquiryService{
 
     @Override
     public List<Inquiry> getAllInquiries() {
-        return inquiryRepository.findAll(Sort.by("dateCreated").descending().and(Sort.by("id")));
+        return inquiryRepository.findAll(Sort.by("dateCreated").descending().and(Sort.by("id").descending()));
     }
 }
