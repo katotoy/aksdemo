@@ -4,47 +4,47 @@ import java.io.Serializable;
 
 public class InquiryRequestDto implements Serializable {
 
-    private String first_name;
-    private String last_name;
-    private String contact_number;
+    private String firstName;
+    private String lastName;
+    private String contactNumber;
     private String request;
-    private String message_text;
+    private String requestText;
     private boolean isCustomer;
 
     public InquiryRequestDto() {
     }
 
-    public InquiryRequestDto(String first_name, String last_name, String contact_number, String request, String message_text, boolean isCustomer) {
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.contact_number = contact_number;
+    public InquiryRequestDto(String firstName, String lastName, String contactNumber, String request, String requestText, boolean isCustomer) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.contactNumber = contactNumber;
         this.request = request;
-        this.message_text = message_text;
+        this.requestText = requestText;
         this.isCustomer = isCustomer;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getContact_number() {
-        return contact_number;
+    public String getContactNumber() {
+        return contactNumber;
     }
 
-    public void setContact_number(String contact_number) {
-        this.contact_number = contact_number;
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
     }
 
     public String getRequest() {
@@ -55,12 +55,12 @@ public class InquiryRequestDto implements Serializable {
         this.request = request;
     }
 
-    public String getMessage_text() {
-        return message_text;
+    public String getRequestText() {
+        return requestText;
     }
 
-    public void setMessage_text(String message_text) {
-        this.message_text = message_text;
+    public void setRequestText(String requestText) {
+        this.requestText = requestText;
     }
 
     public boolean isCustomer() {

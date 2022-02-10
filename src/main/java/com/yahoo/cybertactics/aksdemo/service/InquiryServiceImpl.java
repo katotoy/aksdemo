@@ -3,6 +3,7 @@ package com.yahoo.cybertactics.aksdemo.service;
 import com.yahoo.cybertactics.aksdemo.dto.InquiryRequestDto;
 import com.yahoo.cybertactics.aksdemo.model.Inquiry;
 import com.yahoo.cybertactics.aksdemo.repos.InquiryRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -21,13 +22,13 @@ public class InquiryServiceImpl implements  InquiryService{
     public String saveInquiry(InquiryRequestDto requestDto) {
 
         Inquiry newInquiry = new Inquiry();
-        newInquiry.setFirst_name(requestDto.getFirst_name());
-        newInquiry.setLast_name(requestDto.getLast_name());
-        newInquiry.setContact_number(requestDto.getContact_number());
+        newInquiry.setFirstName(requestDto.getFirstName());
+        newInquiry.setLastName(requestDto.getLastName());
+        newInquiry.setContactNumber(requestDto.getContactNumber());
         newInquiry.setRequest(requestDto.getRequest());
-        newInquiry.setMessage_text(requestDto.getMessage_text());
+        newInquiry.setRequestText(requestDto.getRequestText());
         newInquiry.setCustomer(requestDto.isCustomer());
-        newInquiry.setDate_created(LocalDate.now());
+        newInquiry.setDateCreated(LocalDate.now());
 
         inquiryRepository.save(newInquiry);
 
@@ -36,6 +37,6 @@ public class InquiryServiceImpl implements  InquiryService{
 
     @Override
     public List<Inquiry> getAllInquiries() {
-        return inquiryRepository.findAll();
+        return inquiryRepository.findAll(Sort.by("dateCreated").descending().and(Sort.by("id")));
     }
 }

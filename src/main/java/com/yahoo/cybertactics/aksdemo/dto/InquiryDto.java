@@ -8,25 +8,25 @@ import java.time.LocalDate;
 public class InquiryDto implements Serializable {
 
     private Long id;
-    private LocalDate date_created;
+    private LocalDate dateCreated;
 
-    private String first_name;
-    private String last_name;
-    private String contact_number;
+    private String firstName;
+    private String lastName;
+    private String contactNumber;
     private String request;
-    private String message_text;
+    private String requestText;
     private boolean isCustomer;
 
     public InquiryDto(){}
 
     public InquiryDto(Inquiry e) {
         this.id = e.getId();
-        this.date_created = e.getDate_created();
-        this.first_name = e.getFirst_name();
-        this.last_name = e.getLast_name();
-        this.contact_number = e.getContact_number();
+        this.dateCreated = e.getDateCreated();
+        this.firstName = e.getFirstName();
+        this.lastName = e.getLastName();
+        this.contactNumber = e.getContactNumber();
         this.request = e.getRequest();
-        this.message_text = e.getMessage_text();
+        this.requestText = e.getRequestText();
         this.isCustomer = e.isCustomer();
     }
 
@@ -34,63 +34,31 @@ public class InquiryDto implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public LocalDate getDateCreated() {
+        return dateCreated;
     }
 
-    public LocalDate getDate_created() {
-        return date_created;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setDate_created(LocalDate date_created) {
-        this.date_created = date_created;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-
-    public String getContact_number() {
-        return contact_number;
-    }
-
-    public void setContact_number(String contact_number) {
-        this.contact_number = contact_number;
+    public String getContactNumber() {
+        return contactNumber;
     }
 
     public String getRequest() {
         return request;
     }
 
-    public void setRequest(String request) {
-        this.request = request;
-    }
-
-    public String getMessage_text() {
-        return message_text;
-    }
-
-    public void setMessage_text(String message_text) {
-        this.message_text = message_text;
+    public String getRequestText() {
+        return requestText;
     }
 
     public boolean isCustomer() {
         return isCustomer;
-    }
-
-    public void setCustomer(boolean customer) {
-        isCustomer = customer;
     }
 }

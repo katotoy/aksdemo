@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Thymeleaf Form handling Demo</title>
+    <title>Demo - Contact Us</title>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css">
 </head>
@@ -26,6 +26,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link custom-a" href="#">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link custom-a" href="/inquiry/form">Contact Us</a>
             </li>
           </ul>
         </div>
@@ -66,22 +69,22 @@
                 </div>
 
                 <div class="form-group w-50">
-                    <textarea class="form-control" style="display:block;" placeholder="Please provide your feedback here. (Max. 500 characters limit)" id="inquiryText" rows="4"th:field="*{message_text}"></textarea>
+                    <textarea class="form-control" style="display:block;" placeholder="Please provide your feedback here. (Max. 500 characters limit)" id="inquiryText" rows="4"th:field="*{requestText}"></textarea>
                 </div>
 
                 <div class="form-group w-50">
                     <p>Your contact details</p>
-                    <input id="first_name" placeholder="First Name" required type="text" th:field="*{first_name}"
+                    <input id="first_name" placeholder="First Name" required type="text" th:field="*{firstName}"
                            class="form-control"/>
                 </div>
 
                 <div class="form-group w-50">
-                    <input id="last_name" placeholder="Last Name" required type="text" th:field="*{last_name}"
+                    <input id="last_name" placeholder="Last Name" required type="text" th:field="*{lastName}"
                            class="form-control"/>
                 </div>
 
                 <div class="form-group w-50">
-                    <input id="contactNumber" placeholder="Contact Number" required type="text" th:field="*{contact_number}"
+                    <input id="contactNumber" placeholder="Contact Number" required type="text" th:field="*{contactNumber}"
                            class="form-control"/>
                 </div>
             
