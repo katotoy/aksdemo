@@ -57,7 +57,7 @@
             <span class="alert alert-danger" th:text="${message}"></span>
         </div>
 
-        <form method="post" th:action="@{/inquiry/form}" th:object="${inquiry}">
+        <form method="post" th:action="@{/inquiry/form}" th:object="${inquiry}" novalidate>
 
             <div class="form-group">
                 <p class="mt-4 mb-0">Are you an existing customer?</p>
@@ -97,16 +97,19 @@
                 <p>Your contact details</p>
                 <input id="first_name" placeholder="First Name" required type="text" th:field="*{firstName}"
                        class="form-control"/>
+                <div class="alert alert-warning" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
             </div>
 
             <div class="form-group w-50">
                 <input id="last_name" placeholder="Last Name" required type="text" th:field="*{lastName}"
                        class="form-control"/>
+                <div class="alert alert-warning" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
             </div>
 
             <div class="form-group w-50">
                 <input id="contactNumber" placeholder="Contact Number" required type="text" th:field="*{contactNumber}"
                        class="form-control"/>
+                <div class="alert alert-warning" th:if="${#fields.hasErrors('contactNumber')}" th:errors="*{contactNumber}"></div>
             </div>
 
             <div class="form-check my-3">

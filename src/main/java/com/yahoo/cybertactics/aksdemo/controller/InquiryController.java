@@ -1,38 +1,54 @@
 package com.yahoo.cybertactics.aksdemo.controller;
 
 import com.yahoo.cybertactics.aksdemo.dto.InquiryDto;
+import com.yahoo.cybertactics.aksdemo.dto.InquiryRequestDto;
 import com.yahoo.cybertactics.aksdemo.model.Inquiry;
 import com.yahoo.cybertactics.aksdemo.service.InquiryService;
+import com.yahoo.cybertactics.aksdemo.service.ReCaptchaValidationService;
+import com.yahoo.cybertactics.aksdemo.utils.CustomResponse;
+import com.yahoo.cybertactics.aksdemo.utils.CustomValidationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/inquiry")
-public class InquiryController {
+public class InquiryController extends BaseController{
 
     private final InquiryService inquiryService;
+    private ReCaptchaValidationService validator;
 
-    public InquiryController(InquiryService inquiryService) {
+    public InquiryController(InquiryService inquiryService, ReCaptchaValidationService validator) {
         this.inquiryService = inquiryService;
+        this.validator = validator;
     }
 
     @GetMapping
     public List<InquiryDto> getInquiries(){
 
         List<Inquiry> inquiryList = inquiryService.getAllInquiries();
-        List<InquiryDto> inquiryDtoList = new ArrayList<InquiryDto>();
 
-        inquiryDtoList = inquiryList.stream()
+        return inquiryList.stream()
                 .map(e -> new InquiryDto(e))
                 .collect(Collectors.toList());
+    }
 
-        return inquiryDtoList;
+    @PostMapping
+    public ResponseEntity<CustomResponse> saveInquiry(@RequestBody @Valid InquiryRequestDto requestDto){
+
+        validateRequestDto(requestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new CustomResponse("new inquiry saved"));
+    }
+
+    private void validateRequestDto(InquiryRequestDto requestDto){
+
+        if(requestDto.getRequest().equalsIgnoreCase("I have a feedback") && (requestDto.getRequestText() == null || requestDto.getRequestText().isBlank())){
+            throw new CustomValidationException(this.getClass().getSimpleName(), "Feedback field is required", "requestText");
+        }
     }
 }

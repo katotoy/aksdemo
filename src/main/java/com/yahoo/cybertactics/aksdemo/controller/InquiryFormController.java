@@ -6,8 +6,15 @@ import com.yahoo.cybertactics.aksdemo.service.ReCaptchaValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
+
+import javax.validation.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/inquiry")
@@ -31,13 +38,18 @@ public class InquiryFormController {
     }
 
     @PostMapping("/form")
-    public String processInquiryForm(@ModelAttribute InquiryRequestDto data, @RequestParam(name="g-recaptcha-response")
-            String captcha, Model model){
+    public String processInquiryForm(@Valid @ModelAttribute("inquiry") InquiryRequestDto inquiry,
+                                     BindingResult bindingResult, @RequestParam(name="g-recaptcha-response") String captcha, Model model){
 
         if(!validator.validateCaptcha(captcha)){
             model.addAttribute("message", "Please Verify Captcha");
         }
-        inquiryService.saveInquiry(data);
+
+        if (bindingResult.hasErrors()) {
+            return "inquiry-form";
+        }
+
+        inquiryService.saveInquiry(inquiry);
         return "inquiry-thank-you";
     }
 }
