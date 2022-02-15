@@ -42,6 +42,7 @@ public class InquiryController extends BaseController{
     public ResponseEntity<CustomResponse> saveInquiry(@RequestBody @Valid InquiryRequestDto requestDto){
 
         validateRequestDto(requestDto);
+        inquiryService.saveInquiry(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(new CustomResponse("new inquiry saved"));
     }
 
