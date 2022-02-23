@@ -1,5 +1,7 @@
 package com.yahoo.cybertactics.aksdemo.service;
 
+import com.yahoo.cybertactics.aksdemo.dto.GetInquiryByDateRequestDto;
+import com.yahoo.cybertactics.aksdemo.dto.InquiryDto;
 import com.yahoo.cybertactics.aksdemo.dto.InquiryRequestDto;
 import com.yahoo.cybertactics.aksdemo.model.Inquiry;
 import com.yahoo.cybertactics.aksdemo.repos.InquiryRepository;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class InquiryServiceImpl implements  InquiryService{
@@ -38,5 +41,13 @@ public class InquiryServiceImpl implements  InquiryService{
     @Override
     public List<Inquiry> getAllInquiries() {
         return inquiryRepository.findAll(Sort.by("dateCreated").descending().and(Sort.by("id").descending()));
+    }
+
+    @Override
+    public List<InquiryDto> getInquiriesByDateRange(GetInquiryByDateRequestDto requestDto) {
+        return inquiryRepository.findByDateCreatedBetweenOrderByDateCreatedDescIdAsc(requestDto.getStartDate(), requestDto.getEndDate())
+                .stream()
+                .map(InquiryDto::new)
+                .collect(Collectors.toList());
     }
 }

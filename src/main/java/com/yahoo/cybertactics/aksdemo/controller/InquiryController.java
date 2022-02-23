@@ -1,5 +1,6 @@
 package com.yahoo.cybertactics.aksdemo.controller;
 
+import com.yahoo.cybertactics.aksdemo.dto.GetInquiryByDateRequestDto;
 import com.yahoo.cybertactics.aksdemo.dto.InquiryDto;
 import com.yahoo.cybertactics.aksdemo.dto.InquiryRequestDto;
 import com.yahoo.cybertactics.aksdemo.model.Inquiry;
@@ -12,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,5 +51,16 @@ public class InquiryController extends BaseController{
         if(requestDto.getRequest().equalsIgnoreCase("I have a feedback") && (requestDto.getRequestText() == null || requestDto.getRequestText().isBlank())){
             throw new CustomValidationException(this.getClass().getSimpleName(), "Feedback field is required", "requestText");
         }
+    }
+
+    @PostMapping(value = "/daterange")
+    public ResponseEntity<CustomResponse> getInquiryByDate(@RequestBody @Valid GetInquiryByDateRequestDto requestDto){
+
+        if(requestDto.getStartDate().compareTo(requestDto.getEndDate()) > 0){
+            throw new CustomValidationException(this.getClass().getSimpleName(), "Start date should be equal to or greater than End date.", "date range");
+        }
+
+        List<InquiryDto> results = inquiryService.getInquiriesByDateRange(requestDto);
+        return new ResponseEntity(results, HttpStatus.OK);
     }
 }
