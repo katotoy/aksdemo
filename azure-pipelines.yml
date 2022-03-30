@@ -9,8 +9,7 @@ resources:
 - repo: self
 
 variables:
-  # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'ef04c2df-739c-4e12-a191-2212276e4d7b'
+  dockerRegistryServiceConnection: 'b25eba00-62fd-46a8-9c56-b0e4ee03e4f5'
   imageRepository: 'samples/mydemoapp'
   containerRegistry: 'dildemoappacr.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
